@@ -3,15 +3,24 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  address: {
+    city: string;
+  };
+};
+
 const UsersList: React.FC = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]); // Definir o tipo do estado
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+        const response = await axios.get<User[]>("https://jsonplaceholder.typicode.com/users"); // Garantir o tipo correto da resposta
         setUsers(response.data);
       } catch (err) {
         console.error(err); // Log do erro no console para depuração
