@@ -14,6 +14,7 @@ const UsersList: React.FC = () => {
         const response = await axios.get("https://jsonplaceholder.typicode.com/users");
         setUsers(response.data);
       } catch (err) {
+        console.error(err); // Log do erro no console para depuração
         setError("Erro ao buscar os dados. Tente novamente mais tarde.");
       } finally {
         setLoading(false);
